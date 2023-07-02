@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { ProductService } from 'src/app/demo/service/product.service';
 import { AllergyIntolerance, BundleEntry, Condition, Encounter, Immunization, MedicationAdministration, MedicationDispense, MedicationRequest, MedicationStatement, Observation, Patient, Procedure } from 'fhir/r4';
 import { FhirService } from 'src/app/demo/service/fhir.service';
 import { ActivatedRoute, Router } from '@angular/router';
