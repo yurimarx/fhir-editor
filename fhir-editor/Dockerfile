@@ -10,5 +10,5 @@ RUN npm run build
 
 # step 2 - publish the app
 FROM nginx
-COPY --from=node /app/dist /usr/share/nginx/html
+COPY --from=node /app/dist/sakai-ng /usr/share/nginx/fhir-editor
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
