@@ -1,0 +1,242 @@
+<div *ngIf="patient!.name !== undefined" class="p-fluid p-formgrid grid">
+
+    <p-toast></p-toast>
+
+    <p-card class="col-12 lg:col-12 md:col-12" header="Prontuário do Paciente">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-10 lg:col-10 md:col-6">
+                <input pInputText id="patient" [ngModel]="patient!.name![0].given!" />
+            </div>
+            <div class="field col-2 lg:col-2 md:col-2">
+                <button pButton pRipple label="Voltar" (click)="previous()"></button>                  
+            </div>
+            <div class="field col-2 lg:col-2 md:col-2">
+                <button pButton pRipple label="PT" (click)="changeLang('pt')"></button>                  
+            </div>
+            <div class="field col-2 lg:col-2 md:col-2">
+                <button pButton pRipple label="EN" (click)="changeLang('en')"></button>                  
+            </div>
+        </div>
+        
+        <div class="field col-12 lg:col-12 md:col-12">
+            <p-tabView>
+                <p-tabPanel header="Dados pessoais">
+                    <div class="p-fluid p-formgrid grid">
+                        <div class="field col-2 lg:col-2 md:col-2">
+                            <label for="identifier">Número</label>
+                            <input pInputText id="identifier" [ngModel]="patient!.identifier![2].value!" />
+                        </div>
+                        <div class="field col-2 lg:col-2 md:col-2">
+                            <label for="birth">Data Nascimento</label>
+                            <input pInputText id="birth" [ngModel]="patient!.birthDate!" />
+                        </div>
+                        <div class="field col-2 lg:col-2 md:col-2">
+                            <label for="gender">Gênero</label>
+                            <input pInputText id="gender" [ngModel]="patient!.gender!" />
+                        </div>
+                        <div class="field col-2 lg:col-2 md:col-2">
+                            <label for="marital">Estado Civil</label>
+                            <input pInputText id="marital" [ngModel]="patient!.maritalStatus!.text!" />
+                        </div>
+                        <div class="field col-2 lg:col-2 md:col-2">
+                            <label for="phone">Telefone</label>
+                            <input pInputText id="phone" [ngModel]="patient!.telecom![0].value!" />
+                        </div>
+                        <div class="field col-4 lg:col-4 md:col-4">
+                            <label for="address">{{ 'app.address' | translate }}</label>
+                            <input pInputText id="address" [ngModel]="patient!.address![0].line!" />
+                        </div>
+                        <div class="field col-2 lg:col-2 md:col-2">
+                            <label for="cep">CEP</label>
+                            <input pInputText id="cep" [ngModel]="patient!.address![0].postalCode!" />
+                        </div>
+                        <div class="field col-4 lg:col-4 md:col-4">
+                            <label for="city">Cidade</label>
+                            <input pInputText id="city" [ngModel]="patient!.address![0].city!" />
+                        </div>
+                        <div class="field col-2 lg:col-2 md:col-2">
+                            <label for="state">Estado</label>
+                            <input pInputText id="state" [ngModel]="patient!.address![0].state!" />
+                        </div>
+                        
+                    </div>
+                </p-tabPanel>
+                
+                <p-tabPanel header="Atendimentos">
+                    <div *ngIf="encounters.length > 0" class="field col-12 lg:col-12 md:col-12">
+                        <p-table [value]="encounters">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Status</th>
+                                    <th>Localidade</th>
+                                    <th>Início</th>
+                                    <th>Término</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-encounter>
+                                <tr>
+                                    <td>{{ encounter.resource!.type[0].coding[0]!.display }}</td>
+                                    <td>{{ encounter.resource!.status }}</td>
+                                    <td>{{ encounter.resource!.serviceProvider.display }}</td>
+                                    <td>{{ encounter.resource!.period.start }}</td>
+                                    <td>{{ encounter.resource!.period.end }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Procedimentos">
+                    <div *ngIf="procedures.length > 0" class="field col-12 lg:col-12 md:col-12">
+                        <p-table [value]="procedures">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Status</th>
+                                    <th>Início</th>
+                                    <th>Término</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-procedure>
+                                <tr>
+                                    <td>{{ procedure.resource!.code!.coding[0]!.display }}</td>
+                                    <td>{{ procedure.resource!.status }}</td>
+                                    <td>{{ procedure.resource!.performedPeriod.start }}</td>
+                                    <td>{{ procedure.resource!.performedPeriod.end }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Medicações">
+                    <div *ngIf="medicationRequests.length > 0" class="field col-12 lg:col-12 md:col-12">
+                        <p-table [value]="medicationRequests">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Data Pedido</th>
+                                    <th>Medicação</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-medicationRequest>
+                                <tr>
+                                    <td>{{ medicationRequest.resource!.status }}</td>
+                                    <td>{{ medicationRequest.resource!.authoredOn }}</td>
+                                    <td>{{ medicationRequest.resource!.medicationCodeableConcept.coding[0].display }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>   
+                    
+                </p-tabPanel>
+
+                <p-tabPanel header="Alergias">
+                    <div *ngIf="allergies !== undefined && allergies.length > 0" class="field col-12 lg:col-12 md:col-12">
+                        <p-table [value]="allergies">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Categoria</th>
+                                    <th>Estado Clínico</th>
+                                    <th>Verificação</th>
+                                    <th>Criticidade</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-allergy>
+                                <tr>
+                                    <td>{{ allergy.resource!.type }}</td>
+                                    <td>{{ allergy.resource!.category[0] }}</td>
+                                    <td>{{ allergy.resource!.clinicalStatus.coding[0].code }}</td>
+                                    <td>{{ allergy.resource!.verificationStatus.coding[0].code }}</td>
+                                    <td>{{ allergy.resource!.criticality }}</td>
+                                    <td>{{ allergy.resource!.code.coding[0].display }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>   
+                    
+                </p-tabPanel>
+
+                <p-tabPanel header="Imunizações">
+                    <div *ngIf="immunizations !== undefined && immunizations.length > 0" class="field col-12 lg:col-12 md:col-12">
+                        <p-table [value]="immunizations">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Vacina</th>
+                                    <th>Data</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-immunization>
+                                <tr>
+                                    <td>{{ immunization.resource!.status }}</td>
+                                    <td>{{ immunization.resource!.vaccineCode.coding[0].display }}</td>
+                                    <td>{{ immunization.resource!.occurrenceDateTime }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>   
+                    
+                </p-tabPanel>
+
+                <p-tabPanel header="Condição/Diagnósticos">
+                    <div *ngIf="conditions !== undefined && conditions.length > 0" class="field col-12 lg:col-12 md:col-12">
+                        <p-table [value]="conditions">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Verificação</th>
+                                    <th>Data</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-condition>
+                                <tr>
+                                    <td>{{ condition.resource!.clinicalStatus.coding[0].code }}</td>
+                                    <td>{{ condition.resource!.verificationStatus.coding[0].code }}</td>
+                                    <td>{{ condition.resource!.recordedDate }}</td>
+                                    <td>{{ condition.resource!.code.coding[0].display }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>   
+                    
+                </p-tabPanel>
+
+                <p-tabPanel header="Observações">
+                    <div *ngIf="observations !== undefined && observations.length > 0" class="field col-12 lg:col-12 md:col-12">
+                        <p-table [value]="observations">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Categoria</th>
+                                    <th>Data</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
+                                    <th>Unidade</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-observation>
+                                <tr>
+                                    <td>{{ observation.resource!.status }}</td>
+                                    <td>{{ observation.resource!.category !== undefined ? observation.resource!.category[0]!.coding[0].display : '' }}</td>
+                                    <td>{{ observation.resource!.effectiveDateTime }}</td>
+                                    <td>{{ observation.resource!.code.coding[0].display }}</td>
+                                    <td *ngIf="observation.resource!.component !== undefined">{{ observation.resource!.component[0].valueQuantity !== undefined ? observation.resource!.component[1].valueQuantity.value + '/' + observation.resource!.component[0].valueQuantity.value  : '' }}</td>
+                                    <td *ngIf="observation.resource!.component === undefined">{{ observation.resource!.valueQuantity !== undefined ? observation.resource!.valueQuantity.value : '' }}</td>
+                                    <td *ngIf="observation.resource!.component !== undefined">{{ observation.resource!.component[0].valueQuantity !== undefined ? observation.resource!.component[1].valueQuantity.unit + '/' + observation.resource!.component[0].valueQuantity.unit  : '' }}</td>
+                                    <td *ngIf="observation.resource!.component === undefined">{{ observation.resource!.valueQuantity !== undefined ? observation.resource!.valueQuantity.value : '' }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>   
+                    
+                </p-tabPanel>
+
+            </p-tabView>
+        </div>
+        
+    </p-card>
+
+</div>

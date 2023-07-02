@@ -1,0 +1,22 @@
+version: '3.6'
+services:
+  fhir-server:
+    build: 
+      context: fhir-server
+      dockerfile: Dockerfile
+    restart: always
+    ports: 
+      - 32782:1972
+      - 32783:52773
+      - 32784:53773
+    command: 
+      - -a
+      - iris session iris -U%SYS '##class(Security.Users).UnExpireUserPasswords("*")'
+      - --check-caps false
+  fhir-editor:
+    build: 
+      context: fhir-editor
+      dockerfile: Dockerfile
+    restart: always
+    ports: 
+      - 80:80
