@@ -2,44 +2,38 @@
 
     <p-toast></p-toast>
 
-    <p-card class="col-12 lg:col-12 md:col-12" header="Prontuário do Paciente">
+    <p-card class="col-12 lg:col-12 md:col-12" header="{{ 'app.patient.record' | translate }}">
         <div class="p-fluid p-formgrid grid">
             <div class="field col-10 lg:col-10 md:col-6">
                 <input pInputText id="patient" [ngModel]="patient!.name![0].given!" />
             </div>
             <div class="field col-2 lg:col-2 md:col-2">
-                <button pButton pRipple label="Voltar" (click)="previous()"></button>                  
-            </div>
-            <div class="field col-2 lg:col-2 md:col-2">
-                <button pButton pRipple label="PT" (click)="changeLang('pt')"></button>                  
-            </div>
-            <div class="field col-2 lg:col-2 md:col-2">
-                <button pButton pRipple label="EN" (click)="changeLang('en')"></button>                  
+                <button pButton pRipple label="{{ 'app.back' | translate }}" (click)="previous()"></button>                  
             </div>
         </div>
         
         <div class="field col-12 lg:col-12 md:col-12">
             <p-tabView>
-                <p-tabPanel header="Dados pessoais">
+                <p-tabPanel header="{{ 'app.personal.data' | translate }}">
                     <div class="p-fluid p-formgrid grid">
                         <div class="field col-2 lg:col-2 md:col-2">
-                            <label for="identifier">Número</label>
+                            <label for="identifier">{{ 'app.number' | translate }}</label>
                             <input pInputText id="identifier" [ngModel]="patient!.identifier![2].value!" />
                         </div>
                         <div class="field col-2 lg:col-2 md:col-2">
-                            <label for="birth">Data Nascimento</label>
+                            <label for="birth">{{ 'app.birthdate' | translate }}</label>
                             <input pInputText id="birth" [ngModel]="patient!.birthDate!" />
                         </div>
                         <div class="field col-2 lg:col-2 md:col-2">
-                            <label for="gender">Gênero</label>
+                            <label for="gender">{{ 'app.gender' | translate }}</label>
                             <input pInputText id="gender" [ngModel]="patient!.gender!" />
                         </div>
                         <div class="field col-2 lg:col-2 md:col-2">
-                            <label for="marital">Estado Civil</label>
+                            <label for="marital">{{ 'app.marital' | translate }}</label>
                             <input pInputText id="marital" [ngModel]="patient!.maritalStatus!.text!" />
                         </div>
                         <div class="field col-2 lg:col-2 md:col-2">
-                            <label for="phone">Telefone</label>
+                            <label for="phone">{{ 'app.phone' | translate }}</label>
                             <input pInputText id="phone" [ngModel]="patient!.telecom![0].value!" />
                         </div>
                         <div class="field col-4 lg:col-4 md:col-4">
@@ -47,31 +41,31 @@
                             <input pInputText id="address" [ngModel]="patient!.address![0].line!" />
                         </div>
                         <div class="field col-2 lg:col-2 md:col-2">
-                            <label for="cep">CEP</label>
+                            <label for="cep">{{ 'app.zipcode' | translate }}</label>
                             <input pInputText id="cep" [ngModel]="patient!.address![0].postalCode!" />
                         </div>
                         <div class="field col-4 lg:col-4 md:col-4">
-                            <label for="city">Cidade</label>
+                            <label for="city">{{ 'app.city' | translate }}</label>
                             <input pInputText id="city" [ngModel]="patient!.address![0].city!" />
                         </div>
                         <div class="field col-2 lg:col-2 md:col-2">
-                            <label for="state">Estado</label>
+                            <label for="state">{{ 'app.state' | translate }}</label>
                             <input pInputText id="state" [ngModel]="patient!.address![0].state!" />
                         </div>
                         
                     </div>
                 </p-tabPanel>
                 
-                <p-tabPanel header="Atendimentos">
+                <p-tabPanel header="{{ 'app.encounters' | translate }}">
                     <div *ngIf="encounters.length > 0" class="field col-12 lg:col-12 md:col-12">
                         <p-table [value]="encounters">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Tipo</th>
-                                    <th>Status</th>
-                                    <th>Localidade</th>
-                                    <th>Início</th>
-                                    <th>Término</th>
+                                    <th>{{ 'app.type' | translate }}</th>
+                                    <th>{{ 'app.status' | translate }}</th>
+                                    <th>{{ 'app.place' | translate }}</th>
+                                    <th>{{ 'app.begin' | translate }}</th>
+                                    <th>{{ 'app.end' | translate }}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-encounter>
@@ -86,15 +80,15 @@
                         </p-table>
                     </div>
                 </p-tabPanel>
-                <p-tabPanel header="Procedimentos">
+                <p-tabPanel header="{{ 'app.procedures' | translate }}">
                     <div *ngIf="procedures.length > 0" class="field col-12 lg:col-12 md:col-12">
                         <p-table [value]="procedures">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Tipo</th>
-                                    <th>Status</th>
-                                    <th>Início</th>
-                                    <th>Término</th>
+                                    <th>{{ 'app.type' | translate }}</th>
+                                    <th>{{ 'app.state' | translate }}</th>
+                                    <th>{{ 'app.begin' | translate }}</th>
+                                    <th>{{ 'app.end' | translate }}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-procedure>
@@ -108,14 +102,14 @@
                         </p-table>
                     </div>
                 </p-tabPanel>
-                <p-tabPanel header="Medicações">
+                <p-tabPanel header="{{ 'app.medications' | translate }}">
                     <div *ngIf="medicationRequests.length > 0" class="field col-12 lg:col-12 md:col-12">
                         <p-table [value]="medicationRequests">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Status</th>
-                                    <th>Data Pedido</th>
-                                    <th>Medicação</th>
+                                    <th>{{ 'app.status' | translate }}</th>
+                                    <th>{{ 'app.order.date' | translate }}</th>
+                                    <th>{{ 'app.medication' | translate }}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-medicationRequest>
@@ -130,17 +124,17 @@
                     
                 </p-tabPanel>
 
-                <p-tabPanel header="Alergias">
+                <p-tabPanel header="{{ 'app.allergies' | translate }}">
                     <div *ngIf="allergies !== undefined && allergies.length > 0" class="field col-12 lg:col-12 md:col-12">
                         <p-table [value]="allergies">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Tipo</th>
-                                    <th>Categoria</th>
-                                    <th>Estado Clínico</th>
-                                    <th>Verificação</th>
-                                    <th>Criticidade</th>
-                                    <th>Descrição</th>
+                                    <th>{{ 'app.type' | translate }}</th>
+                                    <th>{{ 'app.category' | translate }}</th>
+                                    <th>{{ 'app.clinical.status' | translate }}</th>
+                                    <th>{{ 'app.verification' | translate }}</th>
+                                    <th>{{ 'app.criticality' | translate }}</th>
+                                    <th>{{ 'app.description' | translate }}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-allergy>
@@ -158,14 +152,14 @@
                     
                 </p-tabPanel>
 
-                <p-tabPanel header="Imunizações">
+                <p-tabPanel header="{{ 'app.immunizations' | translate }}">
                     <div *ngIf="immunizations !== undefined && immunizations.length > 0" class="field col-12 lg:col-12 md:col-12">
                         <p-table [value]="immunizations">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Status</th>
-                                    <th>Vacina</th>
-                                    <th>Data</th>
+                                    <th>{{ 'app.status' | translate }}</th>
+                                    <th>{{ 'app.vaccine' | translate }}</th>
+                                    <th>{{ 'app.date' | translate }}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-immunization>
@@ -180,15 +174,15 @@
                     
                 </p-tabPanel>
 
-                <p-tabPanel header="Condição/Diagnósticos">
+                <p-tabPanel header="{{ 'app.conditions' | translate }}/{{ 'app.diagnoses' | translate }}">
                     <div *ngIf="conditions !== undefined && conditions.length > 0" class="field col-12 lg:col-12 md:col-12">
                         <p-table [value]="conditions">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Status</th>
-                                    <th>Verificação</th>
-                                    <th>Data</th>
-                                    <th>Descrição</th>
+                                    <th>{{ 'app.status' | translate }}</th>
+                                    <th>{{ 'app.verification' | translate }}</th>
+                                    <th>{{ 'app.date' | translate }}</th>
+                                    <th>{{ 'app.description' | translate }}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-condition>
@@ -204,17 +198,17 @@
                     
                 </p-tabPanel>
 
-                <p-tabPanel header="Observações">
+                <p-tabPanel header="{{ 'app.observations' | translate }}">
                     <div *ngIf="observations !== undefined && observations.length > 0" class="field col-12 lg:col-12 md:col-12">
                         <p-table [value]="observations">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th>Status</th>
-                                    <th>Categoria</th>
-                                    <th>Data</th>
-                                    <th>Descrição</th>
-                                    <th>Valor</th>
-                                    <th>Unidade</th>
+                                    <th>{{ 'app.status' | translate }}</th>
+                                    <th>{{ 'app.category' | translate }}</th>
+                                    <th>{{ 'app.date' | translate }}</th>
+                                    <th>{{ 'app.description' | translate }}</th>
+                                    <th>{{ 'app.value' | translate }}</th>
+                                    <th>{{ 'app.unit' | translate }}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-observation>

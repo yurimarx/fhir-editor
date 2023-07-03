@@ -58,10 +58,6 @@ export class RecordComponent implements OnInit {
             translate.use('en');
     }
 
-    changeLang(lang: string) {
-        this.translate.use(lang);
-    }
-
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.patientId = +params[PATIENTID];

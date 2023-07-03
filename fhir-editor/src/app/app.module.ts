@@ -28,7 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AppLayoutModule,
         TranslateModule.forRoot({
             isolate: false,
-            defaultLanguage: 'pt',
+            defaultLanguage: 'en',
       
             loader: {
       

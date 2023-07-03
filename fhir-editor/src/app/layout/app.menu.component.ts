@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-menu',
@@ -10,7 +11,11 @@ export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService, private translate: TranslateService) { 
+        translate.setDefaultLang('en');
+        translate.addLangs(['en', 'pt']);
+        translate.use('en');
+    }
 
     ngOnInit() {
         this.model = [
@@ -57,12 +62,12 @@ export class AppMenuComponent implements OnInit {
             },
             **/
             {
-                label: 'Páginas',
+                label: this.translate.instant("app.pages"),
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
                     
                     {
-                        label: 'Pacientes',
+                        label: this.translate.instant("app.patients"),
                         icon: 'pi pi-fw pi-user',
                         routerLink: ['/pages/patient']
                     },

@@ -3,19 +3,14 @@ import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { BundleEntry, Patient } from 'fhir/r4';
 import { FhirService } from 'src/app/demo/service/fhir.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     templateUrl: './patient.component.html',
     providers: [MessageService]
 })
 export class PatientComponent implements OnInit {
-
-    productDialog: boolean = false;
-
-    deleteProductDialog: boolean = false;
-
-    deleteProductsDialog: boolean = false;
 
     patients: BundleEntry<Patient>[] = [];
 
@@ -33,17 +28,22 @@ export class PatientComponent implements OnInit {
 
     constructor(private fhirService: FhirService, 
         private router: Router,
-        private messageService: MessageService) { }
+        private translate: TranslateService,
+        private messageService: MessageService) {
+            translate.setDefaultLang('en');
+            translate.addLangs(['en', 'pt']);
+            translate.use('en');
+         }
 
     ngOnInit() {
         this.fhirService.getAllPatients().subscribe(data => this.patients = data.entry!);
 
         this.patientCols = [
-            { field: 'resource.identifier.2.value', header: 'Número' },
-            { field: 'resource.birthDate', header: 'Dt. Nascimento' },
-            { field: 'resource.gender', header: 'Gênero' },
-            { field: 'patient.resource.name[0].given[0]', header: 'Nome' },
-            { field: 'patient.resource.name[0].family[0]', header: 'Sobrenome' }
+            { field: 'resource.identifier.2.value', header: this.translate.instant("app.number") },
+            { field: 'resource.birthDate', header: this.translate.instant("app.birthdate") },
+            { field: 'resource.gender', header: this.translate.instant("app.gender") },
+            { field: 'patient.resource.name[0].given[0]', header: this.translate.instant("app.name") },
+            { field: 'patient.resource.name[0].family[0]', header: 'app.family.name' }
         ];
 
     }
@@ -54,11 +54,6 @@ export class PatientComponent implements OnInit {
 
     getRecord(patientId: number) {
         this.router.navigate(['/pages/record', patientId]);
-    }
-
-    hideDialog() {
-        this.productDialog = false;
-        this.submitted = false;
     }
 
     onGlobalFilter(table: Table, event: Event) {

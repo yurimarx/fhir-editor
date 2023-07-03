@@ -7,7 +7,7 @@
                 [globalFilterFields]="['resource.name.0.given.0']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedPatients" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Lista de Pacientes</h5>
+                        <h5 class="m-0">{{ 'app.patient.list' | translate }}</h5>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
@@ -19,11 +19,11 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="resource.identifier.2.value">Número <p-sortIcon field="resource.identifier.2.value"></p-sortIcon></th>
-                        <th pSortableColumn="resource.name.0.given.0">Nome <p-sortIcon field="resource.name.0.given.0"></p-sortIcon></th>
-                        <th pSortableColumn="resource.name.0.family.0">Sobrenome <p-sortIcon field="resource.name.0.family.0"></p-sortIcon></th>
-                        <th pSortableColumn="resource.gender">Gênero <p-sortIcon field="resource.gender"></p-sortIcon></th>
-                        <th pSortableColumn="resource.birthDate">Dt. Nascimento <p-sortIcon field="resource.birthDate"></p-sortIcon></th>
+                        <th pSortableColumn="resource.identifier.2.value">{{ 'app.number' | translate }} <p-sortIcon field="resource.identifier.2.value"></p-sortIcon></th>
+                        <th pSortableColumn="resource.name.0.given.0">{{ 'app.name' | translate }} <p-sortIcon field="resource.name.0.given.0"></p-sortIcon></th>
+                        <th pSortableColumn="resource.name.0.family.0">{{ 'app.family.name' | translate }} <p-sortIcon field="resource.name.0.family.0"></p-sortIcon></th>
+                        <th pSortableColumn="resource.gender">{{ 'app.gender' | translate }} <p-sortIcon field="resource.gender"></p-sortIcon></th>
+                        <th pSortableColumn="resource.birthDate">{{ 'app.birthdate' | translate }} <p-sortIcon field="resource.birthDate"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -33,23 +33,23 @@
                             <p-tableCheckbox [value]="patient"></p-tableCheckbox>
                         </td>
                         <td style="width:10%; min-width:10rem;">
-                            <span class="p-column-title">Número</span>
+                            <span class="p-column-title">{{ 'app.patient.number' | translate }}</span>
                             {{patient.resource.identifier[2].value}}
                         </td>
                         <td style="width:25%; min-width:10rem;">
-                            <span class="p-column-title">Nome</span>
+                            <span class="p-column-title">{{ 'app.patient.name' | translate }}</span>
                             {{patient.resource.name[0].given[0]}}
                         </td>
                         <td style="width:20%; min-width:10rem;">
-                            <span class="p-column-title">Sobrenome</span>
+                            <span class="p-column-title">{{ 'app.patient.family.name' | translate }}</span>
                             {{patient.resource.name[0].family}}
                         </td>
                         <td style="width:15%; min-width:8rem;">
-                            <span class="p-column-title">Gênero</span>
+                            <span class="p-column-title">{{ 'app.gender' | translate }}</span>
                             {{patient.resource.gender}}
                         </td>
                         <td style="width:15%; min-width:10rem;">
-                            <span class="p-column-title">Dt. Nascimento</span>
+                            <span class="p-column-title">{{ 'app.birthdate' | translate }}</span>
                             {{patient.resource.birthDate}}
                         </td>
                         <td>

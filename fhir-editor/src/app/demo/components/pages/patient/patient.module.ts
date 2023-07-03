@@ -16,6 +16,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { PatientRoutingModule } from './patient-routing.module';
 import { PatientComponent } from './patient.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { PatientComponent } from './patient.component';
         DropdownModule,
         RadioButtonModule,
         InputNumberModule,
-        DialogModule
+        DialogModule,
+        TranslateModule,
     ],
     declarations: [PatientComponent]
 })
