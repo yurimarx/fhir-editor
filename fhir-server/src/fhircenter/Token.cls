@@ -11,7 +11,7 @@ Property Scope As %String(MAXLEN = "");
 
 Property RefreshToken As %String(MAXLEN = 500);
 
-Property UserId As %String;65
+Property UserId As %String;
 
 Storage Default
 {
