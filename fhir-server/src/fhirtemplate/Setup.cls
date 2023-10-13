@@ -14,7 +14,8 @@ ClassMethod SetupFHIRServer(ns) As %Status
     ;set importdir="/opt/irisapp/src"
 
     //Install a Foundation namespace and change to it
-    Do ##class(HS.HC.Util.Installer).InstallFoundation(namespace)
+    ; Do ##class(HS.HC.Util.Installer).InstallFoundation(namespace)
+    Do ##class(HS.Util.Installer.Foundation).Install(namespace)
     zn namespace
 
     // Install elements that are required for a FHIR-enabled namespace
