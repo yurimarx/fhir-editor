@@ -29,4 +29,4 @@ $ docker-compose run -d
 
 ## How to Run the Sample
 
-1. Open your browser http://localhost/fhir-editor.
+1. Open your browser http://localhost:8080/fhir-editor.
